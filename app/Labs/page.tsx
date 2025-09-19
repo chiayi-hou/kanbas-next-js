@@ -8,6 +8,10 @@ export default function Labs() {
  return (
    <div id="wd-labs">
      <h1>Labs</h1>
+     <h3>Chia-Yi Hou</h3>
+     <h3>CS4550.11597.202610 Section 1</h3>
+     <a href="https://github.com/chiayi-hou/kanbas-next-js">Link to GitHub Repository</a>
+     <br/><br/>
      <ul>
        <li>
          <Link href="/Labs/Lab1" id="wd-lab1-link">

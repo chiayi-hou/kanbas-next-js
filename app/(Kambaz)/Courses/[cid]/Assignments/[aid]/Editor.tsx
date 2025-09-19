@@ -2,7 +2,7 @@ export default function AssignmentEditor() {
     return (
       <div id="wd-assignments-editor">
         <label htmlFor="wd-name">Assignment Name</label><br></br>
-        <input id="wd-name" value="A1 - ENV + HTML" /><br /><br />
+        <input id="wd-name" defaultValue="A1 - ENV + HTML" /><br /><br />
         <textarea id="wd-description">
           The assignment is available online Submit a link to the landing page of
         </textarea>
@@ -13,7 +13,7 @@ export default function AssignmentEditor() {
               <label htmlFor="wd-points">Points</label>
             </td>
             <td>
-              <input id="wd-points" value={100} />
+              <input id="wd-points" defaultValue={100} type="number" />
             </td>
           </tr>
           {/* Complete on your own */}

@@ -36,7 +36,7 @@ export default function Dashboard() {
                 <div>
                 <h5> CS4100 Artificial Intelligence</h5>
                 <p className="wd-dashboard-course-title">
-                    Full Stack software developer
+                    202610_1 Fall 2025 Semester Full Term
                 </p>
                 <button> Go </button>
                 </div>
@@ -46,9 +46,9 @@ export default function Dashboard() {
             <Link href="/Courses/4120" className="wd-dashboard-course-link">
                 <Image src="/images/nlp.jpg" alt="course image" width={200} height={150} />
                 <div>
-                <h5> CS4100 Natural Language Processing</h5>
+                <h5> CS4120 Natural Language Processing</h5>
                 <p className="wd-dashboard-course-title">
-                    Full Stack software developer
+                    202530_1 Spring 2025 Semester Full Term
                 </p>
                 <button> Go </button>
                 </div>
@@ -60,7 +60,7 @@ export default function Dashboard() {
                 <div>
                 <h5> CS3000 Algorithm & Data</h5>
                 <p className="wd-dashboard-course-title">
-                    Full Stack software developer
+                    202530_1 Spring 2025 Semester Full Term
                 </p>
                 <button> Go </button>
                 </div>
@@ -72,7 +72,7 @@ export default function Dashboard() {
                 <div>
                 <h5> CS3520 Programing in C++</h5>
                 <p className="wd-dashboard-course-title">
-                    Full Stack software developer
+                    202410_1 Fall 2023 Semester Full Term
                 </p>
                 <button> Go </button>
                 </div>
@@ -84,7 +84,7 @@ export default function Dashboard() {
                 <div>
                 <h5> IS4200 Information Retrieval</h5>
                 <p className="wd-dashboard-course-title">
-                    Full Stack software developer
+                    202430_1 Spring 2024 Semester Full Term
                 </p>
                 <button> Go </button>
                 </div>

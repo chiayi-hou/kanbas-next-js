@@ -42,6 +42,12 @@ export default function Assignments() {
                 </p>
             </li>
         </ul>
+        <h3 id="wd-assignments-title">
+          Quizzes 10% of Total <button>+</button> </h3>
+        <h3 id="wd-assignments-title">
+          Exams 20% of Total <button>+</button> </h3>
+        <h3 id="wd-assignments-title">
+          Projects 30% of Total <button>+</button> </h3>
       </div>
   );}
   
