@@ -42,14 +42,14 @@ export default function KambazNavigation() {
           </Link>
         </ListGroupItem>
         <ListGroupItem className="border-0 bg-black text-center">
-          <FaInbox className="fs-1 text-danger"/><br/>
           <Link href="/Inbox" id="wd-inbox-link" className="text-danger text-decoration-none">
+            <FaInbox className="fs-1 text-danger"/><br/>
             Inbox
           </Link>
         </ListGroupItem>
         <ListGroupItem className="border-0 bg-black text-center">
-          <IoFlaskOutline className="fs-1 text-danger"/><br/>
           <Link href="/Labs" id="wd-labs-link" className="text-danger text-decoration-none">
+            <IoFlaskOutline className="fs-1 text-danger"/><br/>
             Labs
           </Link>
         </ListGroupItem>
