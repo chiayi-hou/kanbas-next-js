@@ -10,7 +10,6 @@ export default function Labs() {
      <h1>Labs</h1>
      <h3>Chia-Yi Hou</h3>
      <h3>CS4550.11597.202610 Section 1</h3>
-     <a href="https://github.com/chiayi-hou/kanbas-next-js">Link to GitHub Repository</a>
      <br/><br/>
      <ul>
        <li>
@@ -28,6 +27,9 @@ export default function Labs() {
        <li>
        <Link href="/" id="wd-kambaz-link">
          Kambaz </Link> 
+        </li>
+        <li>
+          <a href="https://github.com/chiayi-hou/kanbas-next-js">GitHub Repository</a>
         </li>
      </ul>
    </div>

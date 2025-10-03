@@ -5,6 +5,6 @@ export default function ModuldControlButtons() {
   return (
     <div className="float-end">
       <GreenCheckmark />
-      <BsPlus  className="fs-5"/>
+      <BsPlus  className="fs-4"/>
       <IoEllipsisVertical className="fs-4" />
     </div> );}

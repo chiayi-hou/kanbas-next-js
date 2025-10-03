@@ -2,12 +2,11 @@ import {FormLabel, FormControl, Badge, FormCheck, Form, Row, Col, Button} from "
 
 export default function AssignmentEditor() {
     return (
-      <div id="wd-assignments-editor" className="w-50">
+      <div id="wd-assignments-editor" className="w-75">
         <FormLabel htmlFor="wd-name">Assignment Name</FormLabel><br></br>
         <FormControl id="wd-name" className="mb-4" defaultValue="A1 - ENV + HTML" />
-        <FormControl id="wd-description" className="mb-4" as="textarea" rows={13} defaultValue="The assignment is available online. 
-          Submit a link to the landing page of your Web application running on Netlify.
-          The landing page should include the following:"/>
+        <FormControl id="wd-description" className="mb-4" as="textarea" rows={13} defaultValue='The assignment is available online.
+          Submit a link to the landing page of your Web application running on Netlify.'/>
         <Form>
             <Row className="mb-3">
                 <Col md={4} className="d-flex justify-content-end align-items-center">

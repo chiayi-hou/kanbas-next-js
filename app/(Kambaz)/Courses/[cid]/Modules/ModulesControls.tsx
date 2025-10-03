@@ -16,7 +16,7 @@ export default function ModulesControls() {
          <GreenCheckmark /> Publish All
        </DropdownToggle>
        <DropdownMenu>
-         <DropdownItem id="wd-publish-all">
+         <DropdownItem id="wd-publish-all" className="d-none">
            <GreenCheckmark /> Publish All
          </DropdownItem>
          <DropdownItem id="wd-publish-all-modules-and-items">
