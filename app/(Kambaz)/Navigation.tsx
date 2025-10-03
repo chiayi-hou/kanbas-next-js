@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { IoCalendarOutline } from "react-icons/io5";
-import { LiaBookSolid, LiaCogSolid } from "react-icons/lia";
+import { LiaBookSolid } from "react-icons/lia";
 import { FaInbox, FaRegCircleUser } from "react-icons/fa6";
 import { IoFlaskOutline } from "react-icons/io5";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
+import Image from "next/image";
 
 export default function KambazNavigation() {
   return (
@@ -14,7 +15,7 @@ export default function KambazNavigation() {
               id="wd-kambaz-navigation">
         <ListGroupItem className="bg-black border-0 text-center" as="a"
               target="_blank" href="https://www.northeastern.edu/" id="wd-neu-link">
-              <img src="/images/NEU.png" width="75px" alt="Northeastern University" />
+              <Image src="/images/NEU.png" width="75" alt="Northeastern University" />
         </ListGroupItem>
         <ListGroupItem className="border-0 bg-black text-center">
           <Link href="/Account" id="wd-account-link" className="text-white text-decoration-none">

@@ -1,4 +1,4 @@
-import {FormLabel, FormControl, Badge, Dropdown, FormSelect, FormCheck, Form, InputGroup, Row, Col, Button} from "react-bootstrap";
+import {FormLabel, FormControl, Badge, FormCheck, Form, Row, Col, Button} from "react-bootstrap";
 
 export default function AssignmentEditor() {
     return (
