@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import AssignmentEditor from "./Editor";
 
 export default async function Assignment() {
