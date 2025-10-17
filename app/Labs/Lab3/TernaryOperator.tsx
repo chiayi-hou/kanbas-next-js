@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function TernaryOperator() {
-    let loggedIn = true;
+    const loggedIn = true;
     return(
         <div id="wd-ternary-operator">
         <h4>Logged In</h4>
