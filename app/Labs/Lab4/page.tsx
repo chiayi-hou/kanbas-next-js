@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import ClickEvent from "./ClickEvent";
 import PassingDataOnEvent from "./PassingDataOnEvent";
@@ -11,7 +11,7 @@ import DateStateVariable from "./DateStateVariable";
 import ObjectStateVariable from "./ObjectStateVariable";
 import ArrayStateVariable from "./ArrayStateVariable";
 import ParentStateComponent from "./ParentStateComponent";
-import ReduxExamples from "./ReduxExamples/page";
+import ReduxExamples from "./ReduxExamples/ReduxExamples";
 
 /* Use Provider to share the "store" with the things inside its body */
 import store from "./store";

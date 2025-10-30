@@ -23,7 +23,9 @@ export default function Dashboard() {
   const {userEnrollments} = useSelector((state:any)=>state.enrollmentReducer);  
    console.log(userEnrollments);
 
-  if (!currentUser) return null;
+  if (!currentUser){
+    return <div>Loading...</div>
+  }
   const displayCourses = enrollmentOnChange ? courses : courses.filter((course: any)=>
                                                         userEnrollments.some((enrollment:any)=>enrollment.course===course._id));  
   const isFaculty = (currentUser.role==="FACULTY"? true:false);
