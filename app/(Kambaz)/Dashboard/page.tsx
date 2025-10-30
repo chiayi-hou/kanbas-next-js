@@ -40,7 +40,6 @@ export default function Dashboard() {
                 onClick={() => {const newId = uuidv4();
                                 const newCourse = { ...course, _id: newId };
                                 dispatch(addNewCourse(newCourse));
-                                dispatch(addNewCourse(course));
                                 dispatch(addEnrollments({_id:uuidv4(), user:currentUser._id, course: newId}))}} > Add </button>
         <button className="btn btn-warning float-end me-2"
                   onClick={() => dispatch(updateCourse(course))} id="wd-update-course-click">Update </button>
