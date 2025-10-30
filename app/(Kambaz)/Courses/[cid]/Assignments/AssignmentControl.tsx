@@ -1,8 +1,11 @@
 import { Button, FormControl, Row, Col } from "react-bootstrap";
 import { FaPlus } from "react-icons/fa6";
 import { CiSearch } from "react-icons/ci";
+import { useParams } from "next/navigation";
+import Link from "next/link";
 
 export default function AssignmentControl() {
+  const {cid} = useParams();
   return (
     <Row>
       <Col xs={12}>
@@ -20,10 +23,12 @@ export default function AssignmentControl() {
               <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
               Group
             </Button>
-            <Button className="me-1" variant="danger" size="lg" id="wd-add-assignment-btn">
-              <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
-              Assignment
-            </Button>
+            <Link href={`/Courses/${cid}/Assignments/new`}>
+              <Button className="me-1" variant="danger" size="lg" id="wd-add-assignment-btn">
+                <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
+                Assignment
+              </Button>
+            </Link>
           </div>
         </div>
       </Col>

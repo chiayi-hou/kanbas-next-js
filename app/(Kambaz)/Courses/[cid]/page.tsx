@@ -1,7 +1,16 @@
+"use client";
 import { redirect } from "next/navigation";
+import { useSelector } from "react-redux";
+import { useParams } from "next/navigation";
 
 
-export default async function CoursesPage({ params, }: { params: Promise<{ cid: string }>; }) {
- const { cid } = await params;
- redirect(`/Courses/${cid}/Home`);
+export default function CoursesPage() {
+ const { cid } = useParams();
+ const {userEnrollments} = useSelector((state:any)=>state.enrollmentReducer); 
+ if (userEnrollments.some((e:any)=>e.course===cid)){
+    redirect(`/Courses/${cid}/Home`);
+ } else {
+    redirect(`/Dashboard`);
+ }
+ 
 }

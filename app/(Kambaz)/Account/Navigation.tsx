@@ -1,9 +1,17 @@
+"use client";
+
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import { usePathname } from "next/navigation";
+
 export default function AccountNavigation() {
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const links = currentUser ? ["Profile"] : ["Signin", "Signup"];
+  const pathname = usePathname();
  return (
    <div id="wd-account-navigation" className="wd list-group fs-5 rounded-0">
-     <Link href="Signin" className="list-group-item active border-0"> Signin </Link>
-     <Link href="Signup" className="list-group-item text-danger border-0"> Signup </Link>
-     <Link href="Profile" className="list-group-item text-danger border-0"> Profile </Link> 
+    {links.map((link)=>(
+      <Link key={link} href={link} className={`list-group-item border-0 ${pathname.endsWith(link)? "active":"text-danger"}`}> {link} </Link>
+    ))}
    </div>
 );}
