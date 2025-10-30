@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import AssignmentEditor from "./Editor";
 import AssignmentInfo from "./AssignmentInfo";
 
-export default async function Assignment() {
+export default function Assignment() {
     const { currentUser } = useSelector((state: any) => state.accountReducer);
       if (!currentUser){
         return <div>Loading...</div>

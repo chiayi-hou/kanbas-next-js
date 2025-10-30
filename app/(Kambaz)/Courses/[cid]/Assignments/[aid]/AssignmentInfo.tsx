@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import { useSelector } from "react-redux";
 
 export default function AssignmentInfo() {
-  const {cid, aid} = useParams();
+  const {aid} = useParams();
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
   const assignment = assignments.find((a:any)=>a._id === aid);
   console.log(aid);
