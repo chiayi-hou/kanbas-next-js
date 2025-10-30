@@ -56,26 +56,26 @@ export default function Dashboard() {
       <hr />
       <div id="wd-dashboard-courses">
         <Row xs={1} md={5} className="g-4">
-            {displayCourses.map(((course:any)=>{
+            {displayCourses.map(((d_course:any)=>{
                 const enrolled = userEnrollments.some(
-                  (e: any) => e.course === course._id
+                  (e: any) => e.course === d_course._id
                 );
                 return (
-                <Col key={course._id} className="wd-dashboard-course" style={{width: "300px"}}>
+                <Col key={d_course._id} className="wd-dashboard-course" style={{width: "300px"}}>
                 <Card>
-                    <Link href={enrolled? `/Courses/${course._id}/`:"/Dashboard"} className="wd-dashboard-course-link text-decoration-none text-dark">
+                    <Link href={enrolled? `/Courses/${d_course._id}/`:"/Dashboard"} className="wd-dashboard-course-link text-decoration-none text-dark">
                         <CardImg variant="top" src="/images/reactjs.jpg" alt="course image" width="100%" height={160}/>
                         <CardBody>
-                            <CardTitle className="wd-dashboard-course-title text-nowrap overflow-hidden">{course.name}</CardTitle>
+                            <CardTitle className="wd-dashboard-course-title text-nowrap overflow-hidden">{d_course.name}</CardTitle>
                             <CardText className="wd-dashboard-course-description overflow-hidden" style={{ height: "100px" }}>
-                                {course.description}
+                                {d_course.description}
                             </CardText>
                             <Button variant="primary">Go</Button>
 
                             {isFaculty && (<>
                                         <button onClick={(event) => {
                                               event.preventDefault();
-                                              dispatch(deleteCourse(course._id));}} 
+                                              dispatch(deleteCourse(d_course._id));}} 
                                               className="btn btn-danger float-end"
                                               id="wd-delete-course-click">
                                               Delete
@@ -83,7 +83,7 @@ export default function Dashboard() {
                                       <button id="wd-edit-course-click"
                                               onClick={(event) => {
                                                   event.preventDefault();
-                                                  setCourse(course);
+                                                  setCourse(d_course);
                                               }}
                                               className="btn btn-warning me-2 float-end" >
                                               Edit
@@ -94,7 +94,7 @@ export default function Dashboard() {
                                 <>
                                 <button onClick={(event) => {
                                               event.preventDefault();
-                                              dispatch(enrolled? deleteEnrollment(course._id):addEnrollments({_id:uuidv4(), user:currentUser._id, course: course._id}));}} 
+                                              dispatch(enrolled? deleteEnrollment(d_course._id):addEnrollments({_id:uuidv4(), user:currentUser._id, course: d_course._id}));}} 
                                               className={`btn float-end ${enrolled? "btn-danger":"btn-success"}`}
                                               id="wd-unenroll-click">
                                               {enrolled? "Unenroll":"Enroll"}
