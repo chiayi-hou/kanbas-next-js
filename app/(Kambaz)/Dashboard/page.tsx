@@ -12,10 +12,6 @@ import { addEnrollments, deleteEnrollment } from "./reducer";
 
 export default function Dashboard() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-  if (currentUser == null) {
-    return null; 
-  }
-  const isFaculty = (currentUser.role==="FACULTY"? true:false);
   const { courses } = useSelector((state: any) => state.coursesReducer);
   const dispatch = useDispatch();
   const [course, setCourse] = useState<any>({
@@ -26,8 +22,11 @@ export default function Dashboard() {
   const [enrollmentOnChange, setOnChange] = useState(false);
   const {userEnrollments} = useSelector((state:any)=>state.enrollmentReducer);  
    console.log(userEnrollments);
+
+  if (!currentUser) return null;
   const displayCourses = enrollmentOnChange ? courses : courses.filter((course: any)=>
                                                         userEnrollments.some((enrollment:any)=>enrollment.course===course._id));  
+  const isFaculty = (currentUser.role==="FACULTY"? true:false);
   
   return (
     <div id="wd-dashboard">
