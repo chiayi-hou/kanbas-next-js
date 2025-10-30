@@ -17,6 +17,11 @@ import Link from "next/link";
 export default function Assignments() {
   const {cid} = useParams();
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+    if (!currentUser){
+      return <div>Loading...</div>
+    }
+    const isFaculty = (currentUser.role==="FACULTY"? true:false);
   const courseAssignments = assignments.filter((assignment:any)=>assignment.course === cid)
     return (
       <div id="wd-assignments">
@@ -31,7 +36,7 @@ export default function Assignments() {
               </div>
               <div>
                 <span className="me-2 py-2 px-3 rounded-pill border border-dark">40% of Total</span>
-                <FaPlus className="fs-4 me-3" />
+                {isFaculty&&<FaPlus className="fs-4 me-3" />}
                 <IoEllipsisVertical className="fs-4" />
               </div>
             </div>
