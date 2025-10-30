@@ -37,7 +37,9 @@ export default function Dashboard() {
         <h5>New Course
         <button className="btn btn-primary float-end"
                 id="wd-add-new-course-click"
-                onClick={() => dispatch(addNewCourse(course))} > Add </button>
+                onClick={() => {setCourse({ ...course, _id: uuidv4() }); 
+                                dispatch(addNewCourse(course));
+                                dispatch(addEnrollments({_id:uuidv4(), user:currentUser._id, course: course._id}))}} > Add </button>
         <button className="btn btn-warning float-end me-2"
                   onClick={() => dispatch(updateCourse(course))} id="wd-update-course-click">Update </button>
           <br />
