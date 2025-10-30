@@ -1,4 +1,6 @@
-import { useSelector, useDispatch } from "react-redux";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { useSelector } from "react-redux";
 export default function HelloRedux() {
   const { message } = useSelector((state: any) => state.helloReducer);
   return (

@@ -1,4 +1,6 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import Link from "next/link";
 import { redirect } from "next/dist/client/components/navigation";
 import { setCurrentUser } from "../reducer";
@@ -13,7 +15,7 @@ export default function Signin() {
  const [credentials, setCredentials] = useState<any>({});
  const dispatch = useDispatch();
  const { enrollments } = db;
-  const { courses } = useSelector((state: any) => state.coursesReducer);
+ // const { courses } = useSelector((state: any) => state.coursesReducer);
  const signin = () => {
     const user = db.users.find(
         (u: any) =>

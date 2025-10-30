@@ -6,7 +6,6 @@ import { LiaBookSolid } from "react-icons/lia";
 import { FaInbox, FaRegCircleUser } from "react-icons/fa6";
 import { IoFlaskOutline } from "react-icons/io5";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
-import Image from "next/image";
 
 import { usePathname } from "next/navigation";
 

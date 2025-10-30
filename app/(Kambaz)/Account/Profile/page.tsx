@@ -1,11 +1,12 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { redirect } from "next/dist/client/components/navigation";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentUser } from "../reducer";
 import Button from "react-bootstrap/Button";
-import Link from "next/link";
-import { FormControl, Form } from "react-bootstrap";
+import { FormControl } from "react-bootstrap";
 
 export default function Profile() {
   const [profile, setProfile] = useState<any>({});

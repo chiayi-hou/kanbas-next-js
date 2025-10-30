@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";

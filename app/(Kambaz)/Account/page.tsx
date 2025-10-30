@@ -1,4 +1,6 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { useSelector } from "react-redux";
 import { redirect } from "next/dist/client/components/navigation";
 
