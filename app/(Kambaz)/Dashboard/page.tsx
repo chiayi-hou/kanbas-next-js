@@ -1,5 +1,6 @@
+"use client"; 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-"use client"
+
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewCourse, deleteCourse, updateCourse } from "../Courses/reducer";
@@ -11,6 +12,9 @@ import { addEnrollments, deleteEnrollment } from "./reducer";
 
 export default function Dashboard() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
+  if (currentUser == null) {
+    return null; 
+  }
   const isFaculty = (currentUser.role==="FACULTY"? true:false);
   const { courses } = useSelector((state: any) => state.coursesReducer);
   const dispatch = useDispatch();
