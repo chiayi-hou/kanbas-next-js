@@ -18,6 +18,7 @@ export default function Modules() {
     const [moduleName, setModuleName] = useState("");
     const { modules } = useSelector((state: any) => state.modulesReducer);
     const dispatch = useDispatch();
+    
     return (
       <div>
         <ModulesControls setModuleName={setModuleName} moduleName={moduleName} 
