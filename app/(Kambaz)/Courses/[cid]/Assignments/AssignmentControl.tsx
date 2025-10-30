@@ -1,3 +1,7 @@
+"use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { useSelector } from "react-redux";
 import { Button, FormControl, Row, Col } from "react-bootstrap";
 import { FaPlus } from "react-icons/fa6";
 import { CiSearch } from "react-icons/ci";
@@ -6,6 +10,11 @@ import Link from "next/link";
 
 export default function AssignmentControl() {
   const {cid} = useParams();
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+  if (!currentUser){
+    return <div>Loading...</div>
+  }
+  const isFaculty = (currentUser.role==="FACULTY"? true:false);
   return (
     <Row>
       <Col xs={12}>
@@ -18,6 +27,7 @@ export default function AssignmentControl() {
 
           <div className="ms-auto"></div>
 
+          {isFaculty&& 
           <div className="d-flex flex-shrink-0">
             <Button className="me-2" variant="secondary" size="lg" id="wd-add-assignment-group-btn">
               <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
@@ -29,7 +39,7 @@ export default function AssignmentControl() {
                 Assignment
               </Button>
             </Link>
-          </div>
+          </div>}
         </div>
       </Col>
     </Row>
