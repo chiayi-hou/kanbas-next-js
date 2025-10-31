@@ -53,8 +53,8 @@ export default function Dashboard() {
 
       <div className="d-flex justify-content-between align-items-center">
         <h2 id="wd-dashboard-published">Published Courses ({displayCourses.length})</h2>
-        {!isFaculty && <button className="btn btn-primary me-2"
-                onClick={() => (setOnChange(!enrollmentOnChange))} id="wd-change-enrollment">{enrollmentOnChange? "My Courses":"All Courses"} </button>}   
+        <button className="btn btn-primary me-2"
+                onClick={() => (setOnChange(!enrollmentOnChange))} id="wd-change-enrollment">{enrollmentOnChange? "My Courses":"All Courses"} </button>
         </div>
       <hr />
       <div id="wd-dashboard-courses">
