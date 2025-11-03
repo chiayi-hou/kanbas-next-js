@@ -93,7 +93,7 @@ export default function Dashboard() {
                                       </button>
                                       </>
                               )}
-                              {(!isFaculty&&enrollmentOnChange) && (
+                              {(enrollmentOnChange) && (
                                 <>
                                 <button onClick={(event) => {
                                               event.preventDefault();
