@@ -75,7 +75,7 @@ export default function Dashboard() {
                             </CardText>
                             <Button variant="primary">Go</Button>
 
-                            {isFaculty && (<>
+                            {(isFaculty && !(enrollmentOnChange)) && (<>
                                         <button onClick={(event) => {
                                               event.preventDefault();
                                               dispatch(deleteCourse(display_course._id));}} 
