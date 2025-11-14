@@ -6,7 +6,8 @@ import axios from "axios";
 // axios doesn't support cookies by default
 // use axios.create() to use cookies
 // replace the use of axios with axiosWithCredentials
-const axiosWithCredentials = axios.create({ withCredentials: true });
+export const axiosWithCredentials = axios.create({ 
+  withCredentials: true });
 
 export const HTTP_SERVER = process.env.NEXT_PUBLIC_HTTP_SERVER;
 export const USERS_API = `${HTTP_SERVER}/api/users`;

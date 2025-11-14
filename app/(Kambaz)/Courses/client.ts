@@ -2,7 +2,7 @@
 
 import axios from "axios";
 // 只要需要根據user display不同東西的都要用這個axiosWithCredentials
-const axiosWithCredentials = axios.create({   baseURL: process.env.NEXT_PUBLIC_HTTP_SERVER, // https://kambaz-node-server-app-2zwg.onrender.com
+const axiosWithCredentials = axios.create({   // https://kambaz-node-server-app-2zwg.onrender.com
 withCredentials: true });
 
 const HTTP_SERVER = process.env.NEXT_PUBLIC_HTTP_SERVER;
@@ -10,7 +10,7 @@ const COURSES_API = `${HTTP_SERVER}/api/courses`;
 const USERS_API = `${HTTP_SERVER}/api/users`;
 
 export const fetchAllCourses = async () => {
-  const { data } = await axios.get(COURSES_API);
+  const { data } = await axiosWithCredentials.get(COURSES_API);
   return data;
 };
 
@@ -25,23 +25,23 @@ export const createCourse = async (course: any) => {
 };
 
 export const deleteCourse = async (id: string) => {
-  const { data } = await axios.delete(`${COURSES_API}/${id}`);
+  const { data } = await axiosWithCredentials.delete(`${COURSES_API}/${id}`);
   return data;
 };
 
 export const updateCourse = async (course: any) => {
-  const { data } = await axios.put(`${COURSES_API}/${course._id}`, course);
+  const { data } = await axiosWithCredentials.put(`${COURSES_API}/${course._id}`, course);
   return data;
 };
 
 export const findModulesForCourse = async (courseId: string) => {
-  const response = await axios
+  const response = await axiosWithCredentials
     .get(`${COURSES_API}/${courseId}/modules`);
   return response.data;
 };
 
 export const createModuleForCourse = async (courseId: string, module: any) => {
-  const response = await axios.post(
+  const response = await axiosWithCredentials.post(
     `${COURSES_API}/${courseId}/modules`,
     module
   );
@@ -50,12 +50,12 @@ export const createModuleForCourse = async (courseId: string, module: any) => {
 
 const MODULES_API = `${HTTP_SERVER}/api/modules`;
 export const deleteModule = async (moduleId: string) => {
- const response = await axios.delete(`${MODULES_API}/${moduleId}`);
+ const response = await axiosWithCredentials.delete(`${MODULES_API}/${moduleId}`);
  return response.data;
 };
 
 export const updateModule = async (module: any) => {
-  const { data } = await axios.put(`${MODULES_API}/${module._id}`, module);
+  const { data } = await axiosWithCredentials.put(`${MODULES_API}/${module._id}`, module);
   return data;
 };
 
