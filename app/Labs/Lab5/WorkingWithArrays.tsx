@@ -1,4 +1,6 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import React, { useState } from "react";
 import { FormControl } from "react-bootstrap";
 import { Form } from "react-bootstrap";

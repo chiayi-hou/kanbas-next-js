@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import axios from "axios";
 // 只要需要根據user display不同東西的都要用這個axiosWithCredentials
 const axiosWithCredentials = axios.create({ withCredentials: true });

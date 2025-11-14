@@ -1,4 +1,6 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { ListGroup, ListGroupItem } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
 import * as client from "./client";

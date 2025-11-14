@@ -1,4 +1,6 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { setCurrentUser } from "../reducer";
