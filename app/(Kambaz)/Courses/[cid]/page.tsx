@@ -8,8 +8,8 @@ import { useParams } from "next/navigation";
 
 export default function CoursesPage() {
  const { cid } = useParams();
- const {userEnrollments} = useSelector((state:any)=>state.enrollmentReducer); 
- if (userEnrollments.some((e:any)=>e.course===cid)){
+ const {enrollments} = useSelector((state:any)=>state.enrollmentReducer); 
+ if (enrollments.some((e:any)=>e.course===cid)){
     redirect(`/Courses/${cid}/Home`);
  } else {
     redirect(`/Dashboard`);

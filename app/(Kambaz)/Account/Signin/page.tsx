@@ -1,6 +1,7 @@
 "use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import * as client from "../client";
 import Link from "next/link";
 import { redirect } from "next/dist/client/components/navigation";
 import { setCurrentUser } from "../reducer";
@@ -14,22 +15,18 @@ import {setUserEnrollments} from "../../Dashboard/reducer";
 export default function Signin() {
  const [credentials, setCredentials] = useState<any>({});
  const dispatch = useDispatch();
- const { enrollments } = db;
+ // const { enrollments } = db;
  // const { courses } = useSelector((state: any) => state.coursesReducer);
- const signin = () => {
-    const user = db.users.find(
-        (u: any) =>
-          u.username === credentials.username &&
-          u.password === credentials.password
-      );
-      if (!user) return;
-      dispatch(setCurrentUser(user));
-      
-      const arrEnrollments = enrollments.filter((enrollment:any) =>
-                                    enrollment.user === user._id 
-                                  );
-      dispatch(setUserEnrollments(arrEnrollments));  
-      redirect("/Dashboard");
+ const signin = async () => {
+    const user = await client.signin(credentials);
+    if (!user) return;
+    dispatch(setCurrentUser(user));
+    
+    //const arrEnrollments = enrollments.filter((enrollment:any) =>
+    //                              enrollment.user === user._id 
+    //                            );
+    //dispatch(setUserEnrollments(arrEnrollments));  
+    redirect("/Dashboard");
   };
 
  return (

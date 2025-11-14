@@ -7,6 +7,7 @@ import GreenCheckmark from "../Modules/GreenCheckmark";
 import { FaTrash } from "react-icons/fa";
 import { deleteAssignment } from "./reducer";
 import { useDispatch } from "react-redux";
+import * as client from "./client";
 
 export default function AssignmentControlButtons({assignmentID}:{assignmentID:string}) {
   const dispatch = useDispatch();
@@ -15,18 +16,28 @@ export default function AssignmentControlButtons({assignmentID}:{assignmentID:st
     return <div>Loading...</div>
   }
   const isFaculty = (currentUser.role==="FACULTY"? true:false);
-  const handleDelete = () => {
-    const confirmDelete = window.confirm("Delete Assignment?");
+  //const handleDelete = () => {
+  //  const confirmDelete = window.confirm("Delete Assignment?");
 
-    if (confirmDelete){
-      dispatch(deleteAssignment(assignmentID))
+  //  if (confirmDelete){
+  //    dispatch(deleteAssignment(assignmentID))
+  //  }
+  //  }
+
+  // delete assignment
+    const onRemoveAssignment = async (assignmentID: string)=>{
+      const confirmDelete = window.confirm("Delete Assignment?");
+
+      if (confirmDelete){
+        await client.deleteAssignment(assignmentID as string);
+        dispatch(deleteAssignment(assignmentID));
+      }
     }
-  }
   
   return (
     <div>
       {isFaculty&&<>
-      <FaTrash className="text-danger me-2 mb-1" onClick={handleDelete}/>
+      <FaTrash className="text-danger me-2 mb-1" onClick={()=>{onRemoveAssignment(assignmentID)}}/>
       <GreenCheckmark />
       </>}
       <IoEllipsisVertical className="fs-4" />

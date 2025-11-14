@@ -14,6 +14,11 @@ import { GoTriangleDown } from "react-icons/go";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 
+import { setAssignments } from "./reducer";
+import { useEffect } from "react";
+import * as client from "./client";
+import { useDispatch } from "react-redux";
+
 export default function Assignments() {
   const {cid} = useParams();
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
@@ -21,12 +26,23 @@ export default function Assignments() {
     if (!currentUser){
       return <div>Loading...</div>
     }
-    const isFaculty = (currentUser.role==="FACULTY"? true:false);
-  const courseAssignments = assignments.filter((assignment:any)=>assignment.course === cid)
+  const isFaculty = (currentUser.role==="FACULTY"? true:false);
+  //const courseAssignments = assignments.filter((assignment:any)=>assignment.course === cid)
+  const dispatch = useDispatch();
+  
+  // load assignments and sent to reducer
+  const fetchAssignments = async () => {
+    const assignments = await client.findAssignmentsForCourse(cid as string);
+    dispatch(setAssignments(assignments));
+  }
+  useEffect(() => {
+    fetchAssignments();
+  }, []);
+
     return (
       <div id="wd-assignments">
         <AssignmentControl/><br/><br/>
-        {courseAssignments.length > 0 && (
+        {assignments.length > 0 && (
           <ListGroup className="rounded-0" id="wd-assignment-list">
             <ListGroupItem key="assignment" id="wd-assignments-title" className="wd-module p-0 mb-5 fs-5 border-gray">
             <div className="wd-title p-3 ps-2 bg-secondary d-flex align-items-center justify-content-between"> 
@@ -41,7 +57,7 @@ export default function Assignments() {
               </div>
             </div>
             <ListGroup className="wd-assignments rounded-0">
-            {courseAssignments.map((assignment:any)=>(
+            {assignments.map((assignment:any)=>(
               <ListGroupItem action key={assignment._id} id="wd-assignment-list-item" className="wd-lesson p-3 ps-1">
                     <div className="d-flex align-items-center justify-content-between">
                       <Link href={`/Courses/${cid}/Assignments/${assignment._id}`}

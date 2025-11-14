@@ -10,6 +10,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { addAssignment, updateAssignment } from "../reducer";
+import { useEffect } from "react";
+import * as client from "../client";
 
 export default function AssignmentEditor() {
   const {cid, aid} = useParams();
@@ -28,6 +30,16 @@ export default function AssignmentEditor() {
         points: assignment? assignment.points : "0"
   }))
   const dispatch = useDispatch();
+  const onCreateAssignmentForCourse = async () => {
+    if (!cid) return;
+    const assignment = await client.createAssignmentForCourse(cid as string, form);
+  };
+
+  const onUpdateAssignment = async () => {
+    if (!cid) return;
+    const assignment = await client.updateAssignment(form);
+  };
+
     return (
       <div id="wd-assignments-editor" className="w-75">
         {(assignment || isNew) && (
@@ -136,8 +148,11 @@ export default function AssignmentEditor() {
                 </Row>
               </Form>
               <br/><hr/>
-              <Button onClick={()=>{if (isNew){dispatch(addAssignment(form));}
-                                    else {dispatch(updateAssignment(form));}
+              <Button onClick={()=>{
+                                    //if (isNew){dispatch(addAssignment(form));}
+                                    //else {dispatch(updateAssignment(form));}
+                                    if (isNew){onCreateAssignmentForCourse()}
+                                    else {onUpdateAssignment()};
                                     router.push(`/Courses/${cid}/Assignments`);}}
                       className="bg-danger float-end pd-3 rounded-1">
                 Save
