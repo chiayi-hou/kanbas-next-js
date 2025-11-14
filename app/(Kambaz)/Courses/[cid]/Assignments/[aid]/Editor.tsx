@@ -153,7 +153,8 @@ export default function AssignmentEditor() {
                                     //else {dispatch(updateAssignment(form));}
                                     if (isNew){onCreateAssignmentForCourse()}
                                     else {onUpdateAssignment()};
-                                    redirect(`/Courses/${cid}/Assignments`);}}
+                                    router.push(`/Courses/${cid}/Assignments`);
+                                    router.refresh();}}
                       className="bg-danger float-end pd-3 rounded-1">
                 Save
               </Button>
