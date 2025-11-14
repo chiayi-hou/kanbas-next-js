@@ -66,10 +66,10 @@ export default function Modules() {
                 {/* show input field if editing */}
                 { m.editing && (
                   <FormControl className="w-50 d-inline-block"
-                        onChange={(e) => dispatch(updateModule({ ...module, name: e.target.value }))}
+                        onChange={(e) => dispatch(updateModule({ ...m, name: e.target.value }))}
                         onKeyDown={(e) => {
                           if (e.key === "Enter") {
-                             onUpdateModule({ ...module, editing: false });
+                             onUpdateModule({ ...m, editing: false });
                           }
                         }}
                         defaultValue={m.name}/>

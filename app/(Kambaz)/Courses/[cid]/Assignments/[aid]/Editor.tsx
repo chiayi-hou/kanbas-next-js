@@ -1,7 +1,7 @@
 "use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { useParams } from "next/navigation";
+import { redirect, useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {FormLabel, FormControl, Badge, FormCheck, Form, Row, Col, Button} from "react-bootstrap";
@@ -153,7 +153,7 @@ export default function AssignmentEditor() {
                                     //else {dispatch(updateAssignment(form));}
                                     if (isNew){onCreateAssignmentForCourse()}
                                     else {onUpdateAssignment()};
-                                    router.push(`/Courses/${cid}/Assignments`);}}
+                                    redirect(`/Courses/${cid}/Assignments`);}}
                       className="bg-danger float-end pd-3 rounded-1">
                 Save
               </Button>
