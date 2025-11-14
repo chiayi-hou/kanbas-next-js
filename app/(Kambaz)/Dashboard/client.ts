@@ -2,7 +2,8 @@
 
 import axios from "axios";
 // 只要需要根據user display不同東西的都要用這個axiosWithCredentials
-const axiosWithCredentials = axios.create({ withCredentials: true });
+const axiosWithCredentials = axios.create({   baseURL: process.env.NEXT_PUBLIC_HTTP_SERVER, // https://kambaz-node-server-app-2zwg.onrender.com
+withCredentials: true });
 
 const HTTP_SERVER = process.env.NEXT_PUBLIC_HTTP_SERVER;
 const COURSES_API = `${HTTP_SERVER}/api/courses`;

@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import * as client from "../Courses/client";
-import * as enrollmentClient from "./client";
+//import * as enrollmentClient from "./client";
 
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -64,18 +64,18 @@ export default function Dashboard() {
   // deal with enrollment
   const fetchEnrollment = async () => {
     try {
-      const userEnrollments = await enrollmentClient.findEnrollmentForUser();
+      const userEnrollments = await client.findEnrollmentForUser();
       dispatch(setUserEnrollments(userEnrollments));
     } catch (error) {
       console.error(error)
     }
   }
   const onAddEnrollment = async (courseId: string) => {
-    const newEnrollment = await enrollmentClient.addEnrollmentForUser(courseId);
+    const newEnrollment = await client.addEnrollmentForUser(courseId);
     dispatch(addEnrollments(newEnrollment));
   }
   const onDeleteEnrollment = async (courseID: string) => {
-    await enrollmentClient.unEnrollForUser(courseID);
+    await client.unEnrollForUser(courseID);
     dispatch(deleteEnrollment( courseID));
   }
 
