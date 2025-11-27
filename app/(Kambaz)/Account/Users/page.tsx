@@ -1,4 +1,6 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import PeopleTable from "../../Courses/[cid]/People/Table";
