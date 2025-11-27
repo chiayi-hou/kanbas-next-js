@@ -61,7 +61,7 @@ export default function Dashboard() {
 
   // deal with enrollment
   const onAddEnrollment = async (userId:string, courseId: string, course:any) => {
-    //const newEnrollment = await client.addEnrollmentForUser(userId, courseId);
+    const newEnrollment = await client.addEnrollmentForUser(userId, courseId);
     dispatch(addNewCourse(course))
     //dispatch(addEnrollments(newEnrollment));
   }
