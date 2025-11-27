@@ -14,10 +14,10 @@ export default function CoursesLayout({ children }: { children: ReactNode }) {
 const { cid } = useParams();
  const { courses } = useSelector((state: any) => state.coursesReducer);
  const course = courses.find((course: any) => course._id === cid);
- const {enrollments} = useSelector((state:any)=>state.enrollmentReducer); 
- if (!enrollments.some((e:any)=>e.course===cid)){
-    redirect(`/Dashboard`);
- } 
+ //const {enrollments} = useSelector((state:any)=>state.enrollmentReducer); 
+ //if (!enrollments.some((c:any)=>c._id===cid)){
+ //   redirect(`/Dashboard`);
+ //} 
  const [show, setShow] = useState(true);
  return (
    <div id="wd-courses">

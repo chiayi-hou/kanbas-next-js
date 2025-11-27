@@ -29,12 +29,12 @@ export default function Modules() {
     };
 
     const onRemoveModule = async (moduleId: string) => {
-      await client.deleteModule(moduleId);
+      await client.deleteModule(cid as string, moduleId);
       dispatch(setModules(modules.filter((m: any) => m._id !== moduleId)));
     };
 
     const onUpdateModule = async (m: any) => {
-      await client.updateModule(m);
+      await client.updateModule(cid as string, m);
       const newModules = modules.map((currentM: any) => currentM._id === m._id ? m : currentM );
       dispatch(setModules(newModules));
     };

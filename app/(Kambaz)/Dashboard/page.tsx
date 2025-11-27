@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import * as client from "../Courses/client";
-//import * as enrollmentClient from "./client";
 
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,7 +16,6 @@ import { setUserEnrollments, addEnrollments, deleteEnrollment } from "./reducer"
 export default function Dashboard() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const { courses } = useSelector((state: any) => state.coursesReducer);
-  const { enrollments } = useSelector((state: any) => state.enrollmentReducer);
   const dispatch = useDispatch();
 
   const [course, setCourse] = useState<any>({
@@ -62,27 +60,21 @@ export default function Dashboard() {
     })));};
 
   // deal with enrollment
-  const fetchEnrollment = async () => {
-    try {
-      const userEnrollments = await client.findEnrollmentForUser();
-      dispatch(setUserEnrollments(userEnrollments));
-    } catch (error) {
-      console.error(error)
-    }
+  const onAddEnrollment = async (userId:string, courseId: string, course:any) => {
+    //const newEnrollment = await client.addEnrollmentForUser(userId, courseId);
+    dispatch(addNewCourse(course))
+    //dispatch(addEnrollments(newEnrollment));
   }
-  const onAddEnrollment = async (courseId: string) => {
-    const newEnrollment = await client.addEnrollmentForUser(courseId);
-    dispatch(addEnrollments(newEnrollment));
-  }
-  const onDeleteEnrollment = async (courseID: string) => {
-    await client.unEnrollForUser(courseID);
-    dispatch(deleteEnrollment( courseID));
+  const onDeleteEnrollment = async (userId:string, courseID: string) => {
+    await client.unEnrollForUser(userId, courseID);
+    dispatch(deleteCourse(courseID))
+    //dispatch(deleteEnrollment( courseID));
   }
 
   // on load
   useEffect(() => {
     fetchCourses();
-    fetchEnrollment();
+    //fetchEnrollment();
   }, [currentUser]);
 
 
@@ -133,8 +125,8 @@ export default function Dashboard() {
       <div id="wd-dashboard-courses">
         <Row xs={1} md={5} className="g-4">
             {displayCourses.map(((display_course:any)=>{
-                const enrolled = enrollments.some(
-                  (e: any) => e.course === display_course._id
+                const enrolled = courses.some(
+                  (c: any) => c._id === display_course._id
                 );
                 return (
                 <Col key={display_course._id} className="wd-dashboard-course" style={{width: "300px"}}>
@@ -171,7 +163,7 @@ export default function Dashboard() {
                                 <>
                                 <button onClick={(event) => {
                                               event.preventDefault();
-                                              (enrolled? onDeleteEnrollment(display_course._id):onAddEnrollment(display_course._id));}} 
+                                              (enrolled? onDeleteEnrollment(currentUser._id, display_course._id):onAddEnrollment(currentUser._id, display_course._id, display_course));}} 
                                               className={`btn float-end ${enrolled? "btn-danger":"btn-success"}`}
                                               id="wd-unenroll-click">
                                               {enrolled? "Unenroll":"Enroll"}

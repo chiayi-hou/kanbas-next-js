@@ -20,14 +20,16 @@ export const findEnrollmentForUser = async () => {
 
 export const addEnrollmentForUser = async (courseId: string) => {
   const response = await axiosWithCredentials.post(
-    `${ENROLLMENT_API}/${courseId}`);
+    `/api/users/:uid/courses/${courseId}`);
+    //`${ENROLLMENT_API}/${courseId}`);
   return response.data;
 };
 
 export const unEnrollForUser = async (courseId: string) => {
   try{
     const response = await axiosWithCredentials.delete(
-    `${ENROLLMENT_API}/${courseId}`);
+   `/api/users/:uid/courses/${courseId}`);
+      //`${ENROLLMENT_API}/${courseId}`);
     return response.data;
     } catch (error: any){
         console.error("unEnrollForUser axios error:", {
