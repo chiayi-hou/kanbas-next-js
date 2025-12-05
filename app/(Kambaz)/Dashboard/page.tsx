@@ -1,4 +1,4 @@
-"use client"; 
+"use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import * as client from "../Courses/client";
@@ -60,15 +60,23 @@ export default function Dashboard() {
     })));};
 
   // deal with enrollment
-  const onAddEnrollment = async (userId:string, courseId: string, course:any) => {
-    const newEnrollment = await client.addEnrollmentForUser(userId, courseId);
-    dispatch(addNewCourse(course))
-    //dispatch(addEnrollments(newEnrollment));
+  const onAddEnrollment = async (courseId: string, course:any) => {
+    await client.addEnrollmentForUser(courseId);
+    // Refresh the enrolled courses list
+    await fetchCourses();
+    // Also refresh all courses list if we're in "All Courses" view
+    if (enrollmentOnChange) {
+      await fetchAllCourses();
+    }
   }
-  const onDeleteEnrollment = async (userId:string, courseID: string) => {
-    await client.unEnrollForUser(userId, courseID);
-    dispatch(deleteCourse(courseID))
-    //dispatch(deleteEnrollment( courseID));
+  const onDeleteEnrollment = async (courseID: string) => {
+    await client.unEnrollForUser(courseID);
+    // Refresh the enrolled courses list
+    await fetchCourses();
+    // Also refresh all courses list if we're in "All Courses" view
+    if (enrollmentOnChange) {
+      await fetchAllCourses();
+    }
   }
 
   // on load
@@ -79,15 +87,15 @@ export default function Dashboard() {
 
 
   const [enrollmentOnChange, setOnChange] = useState(false);
-  //const {userEnrollments} = useSelector((state:any)=>state.enrollmentReducer);  
+  //const {userEnrollments} = useSelector((state:any)=>state.enrollmentReducer);
   // console.log(userEnrollments);
 
   if (!currentUser){
     return <div>Loading...</div>
   }
-  const displayCourses = enrollmentOnChange ? allCourses : courses;  
+  const displayCourses = enrollmentOnChange ? allCourses : courses;
   const isFaculty = (currentUser.role==="FACULTY"? true:false);
-  
+
   return (
     <div id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
@@ -105,7 +113,7 @@ export default function Dashboard() {
         <button className="btn btn-warning float-end me-2"
                   onClick={() => {onUpdateCourse()}} id="wd-update-course-click">Update </button>
           <br />
-        <FormControl value={course.name} className="mb-2" 
+        <FormControl value={course.name} className="mb-2"
                     onChange={(e) => setCourse({ ...course, name: e.target.value }) } />
         <FormControl as="textarea" value={course.description} rows={3}
                     onChange={(e) => setCourse({ ...course, description: e.target.value }) }/>
@@ -117,12 +125,19 @@ export default function Dashboard() {
        { (!isFaculty) &&
         <button className="btn btn-primary me-2"
                 onClick={async () => {if (!enrollmentOnChange){await fetchAllCourses();}else{await fetchCourses()};
-                setOnChange(!enrollmentOnChange)}} 
+                setOnChange(!enrollmentOnChange)}}
                 id="wd-change-enrollment">{enrollmentOnChange? "My Courses":"All Courses"} </button>
        }
         </div>
       <hr />
       <div id="wd-dashboard-courses">
+        {!isFaculty && !enrollmentOnChange && courses.length === 0 ? (
+          <div className="text-center p-5">
+            <h3>No enrolled courses</h3>
+            <p className="text-muted">You are not enrolled in any courses yet.</p>
+            <p>Click "All Courses" above to browse and enroll in available courses.</p>
+          </div>
+        ) : (
         <Row xs={1} md={5} className="g-4">
             {displayCourses.map(((display_course:any)=>{
                 const enrolled = courses.some(
@@ -144,7 +159,7 @@ export default function Dashboard() {
                                         <button onClick={(event) => {
                                               event.preventDefault();
                                               onDeleteCourse(display_course._id);
-                                            }} 
+                                            }}
                                               className="btn btn-danger float-end"
                                               id="wd-delete-course-click">
                                               Delete
@@ -163,7 +178,7 @@ export default function Dashboard() {
                                 <>
                                 <button onClick={(event) => {
                                               event.preventDefault();
-                                              (enrolled? onDeleteEnrollment(currentUser._id, display_course._id):onAddEnrollment(currentUser._id, display_course._id, display_course));}} 
+                                              (enrolled? onDeleteEnrollment(display_course._id):onAddEnrollment(display_course._id, display_course));}}
                                               className={`btn float-end ${enrolled? "btn-danger":"btn-success"}`}
                                               id="wd-unenroll-click">
                                               {enrolled? "Unenroll":"Enroll"}
@@ -176,6 +191,7 @@ export default function Dashboard() {
             </Col>)
             }))}
         </Row>
+        )}
       </div>
     </div>
 );}

@@ -71,18 +71,16 @@ export const findEnrollmentForUser = async (userId: string) => {
   return response.data;
 };
 
-export const addEnrollmentForUser = async (userId: string, courseId: string) => {
+export const addEnrollmentForUser = async (courseId: string) => {
   const response = await axiosWithCredentials.post(
-    `${HTTP_SERVER}/api/users/${userId}/courses/${courseId}`);
-    //`${ENROLLMENT_API}/${courseId}`);
+    `${HTTP_SERVER}/api/users/current/courses/${courseId}`);
   return response.data;
 };
 
-export const unEnrollForUser = async (userId: string, courseId: string) => {
+export const unEnrollForUser = async (courseId: string) => {
   try{
     const response = await axiosWithCredentials.delete(
-    `${HTTP_SERVER}/api/users/${userId}/courses/${courseId}`);
-    //  `${ENROLLMENT_API}/${courseId}`);
+    `${HTTP_SERVER}/api/users/current/courses/${courseId}`);
     return response.data;
     } catch (error: any){
         console.error("unEnrollForUser axios error:", {

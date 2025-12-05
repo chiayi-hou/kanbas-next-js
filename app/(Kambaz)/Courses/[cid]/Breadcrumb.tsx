@@ -2,12 +2,13 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 
-
 export default function Breadcrumb({ course }: { course: { name: string } | undefined; }) {
- const pathname = usePathname();
- return (
-   <span>
-    {course?.name} &gt; {pathname.split("/").pop()}
-   </span>
- );
+  const pathname = usePathname();
+  const tabName = pathname.split("/")[3];
+
+  return (
+    <span>
+      {course?.name} {tabName && `> ${tabName}`}
+    </span>
+  );
 }
