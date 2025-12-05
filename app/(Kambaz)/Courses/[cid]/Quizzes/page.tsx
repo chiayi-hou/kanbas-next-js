@@ -24,6 +24,17 @@ export default function Quizzes() {
   const dispatch = useDispatch();
   const [expanded, setExpanded] = useState(true);
 
+  // sort quizzes
+  const sortedQuizzes = useMemo(
+  () =>
+    [...quizzes].sort(
+      (a, b) =>
+        new Date(a.availableFrom).getTime() -
+        new Date(b.availableFrom).getTime()
+    ),
+  [quizzes]
+);
+
   // load quizzes and sent to reducer
   const fetchQuizzes = async () => {
     const quizzesData = await client.findQuizzesForCourse(cid as string);
@@ -37,23 +48,12 @@ export default function Quizzes() {
     return <div>Loading...</div>
   }
 
-  // sort quizzes
-  const sortedQuizzes = useMemo(
-  () =>
-    [...quizzes].sort(
-      (a, b) =>
-        new Date(a.availableFrom).getTime() -
-        new Date(b.availableFrom).getTime()
-    ),
-  [quizzes]
-);
-
   return (
     <div id="wd-quizzes">
       <QuizControl/><br/><br/>
       {quizzes.length === 0 ? (
         <div className="text-center p-5">
-          <p>No quizzes available. Click the "Quiz" button to add a new quiz.</p>
+          <p>No quizzes available. Click the &quot;Quiz&quot; button to add a new quiz.</p>
         </div>
       ) : (
         <ListGroup className="rounded-0" id="wd-quiz-list">

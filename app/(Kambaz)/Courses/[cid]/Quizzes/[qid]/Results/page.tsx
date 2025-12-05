@@ -50,7 +50,7 @@ export default function QuizResults() {
   if (!attempt) {
     return (
       <div className="ms-5 me-5">
-        <Alert variant="info">You haven't taken this quiz yet.</Alert>
+        <Alert variant="info">You haven&apos;t taken this quiz yet.</Alert>
         <Button onClick={() => router.push(`/Courses/${cid}/Quizzes/${qid}/Take`)}>
           Take Quiz
         </Button>

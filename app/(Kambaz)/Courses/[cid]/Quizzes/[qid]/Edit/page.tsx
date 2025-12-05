@@ -34,7 +34,7 @@ const QuestionPreview = ({ question, onEdit, onDelete }: { question: any; onEdit
 // Question Editor Component (moved outside to prevent re-renders)
 const QuestionEditor = ({ question, setQuestion, onSave, onCancel }: { question: any; setQuestion: (q: any) => void; onSave: () => void; onCancel: () => void }) => {
   const handleTypeChange = (newType: string) => {
-    let updatedQuestion = { ...question, type: newType };
+    const updatedQuestion = { ...question, type: newType };
 
     if (newType === "Multiple Choice") {
       updatedQuestion.choices = question.choices && question.choices.length > 0 ? question.choices : ["", ""];
@@ -802,7 +802,7 @@ export default function QuizEditor() {
           {/* Questions List */}
           {questions.length === 0 ? (
             <div className="text-center p-5 mb-3">
-              <p>No questions yet. Click "New Question" to add your first question.</p>
+              <p>No questions yet. Click &quot;New Question&quot; to add your first question.</p>
             </div>
           ) : (
             questions.map((question: any) => (
