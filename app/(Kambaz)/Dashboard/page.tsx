@@ -135,7 +135,7 @@ export default function Dashboard() {
           <div className="text-center p-5">
             <h3>No enrolled courses</h3>
             <p className="text-muted">You are not enrolled in any courses yet.</p>
-            <p>Click "All Courses" above to browse and enroll in available courses.</p>
+            <p>Click &quot;All Courses&quot; above to browse and enroll in available courses.</p>
           </div>
         ) : (
         <Row xs={1} md={5} className="g-4">
