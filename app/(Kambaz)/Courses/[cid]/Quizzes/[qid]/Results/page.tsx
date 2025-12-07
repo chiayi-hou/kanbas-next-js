@@ -93,6 +93,34 @@ export default function QuizResults() {
 
   const totalPoints = quiz.questions?.reduce((sum: number, q: any) => sum + (q.points || 0), 0) || 0;
 
+  // Determine if correct answers should be shown based on quiz settings
+  const shouldShowCorrectAnswers = (): boolean => {
+    const setting = quiz.showCorrectAnswers;
+    
+    // "Immediately" or true - always show
+    if (setting === true || setting === "Immediately") {
+      return true;
+    }
+    
+    // "Never" or false - never show
+    if (setting === false || setting === "Never") {
+      return false;
+    }
+    
+    // "After Due Date" - show only if current date is past due date
+    if (setting === "After Due Date") {
+      if (!quiz.due) return true; // If no due date set, show answers
+      const now = new Date();
+      const dueDate = new Date(quiz.due);
+      return now > dueDate;
+    }
+    
+    // Default: don't show
+    return false;
+  };
+
+  const showAnswers = shouldShowCorrectAnswers();
+
   return (
     <div id="wd-quiz-results" className="ms-5 me-5">
       <h2>{quiz.title}</h2>
@@ -127,6 +155,17 @@ export default function QuizResults() {
         </div>
       </div>
 
+      {/* Show message about when correct answers will be available */}
+      {!showAnswers && (
+        <Alert variant="info" className="mb-4">
+          {quiz.showCorrectAnswers === "After Due Date" && quiz.due ? (
+            <>Correct answers will be available after the due date ({formatDate(quiz.due)}).</>
+          ) : (
+            <>Correct answers are not available for this quiz.</>
+          )}
+        </Alert>
+      )}
+
       {quiz.questions?.map((question: any, index: number) => {
         const studentAnswer = getStudentAnswer(question._id);
         const isCorrect = isAnswerCorrect(question, studentAnswer);
@@ -135,20 +174,24 @@ export default function QuizResults() {
           <div
             key={question._id}
             className={`border rounded p-4 mb-4 ${
-              isCorrect ? "bg-light border-success" : "bg-light border-danger"
+              showAnswers 
+                ? (isCorrect ? "bg-light border-success" : "bg-light border-danger")
+                : "bg-light"
             }`}
           >
             <div className="d-flex justify-content-between align-items-start mb-3">
               <h5>
                 Question {index + 1}: {question.title} ({question.points} pts)
               </h5>
-              <div>
-                {isCorrect ? (
-                  <FaCheckCircle className="text-success fs-4" />
-                ) : (
-                  <FaTimesCircle className="text-danger fs-4" />
-                )}
-              </div>
+              {showAnswers && (
+                <div>
+                  {isCorrect ? (
+                    <FaCheckCircle className="text-success fs-4" />
+                  ) : (
+                    <FaTimesCircle className="text-danger fs-4" />
+                  )}
+                </div>
+              )}
             </div>
 
             <div className="mb-3">
@@ -157,43 +200,47 @@ export default function QuizResults() {
 
             <div className="mb-2">
               <strong>Your Answer: </strong>
-              <span className={isCorrect ? "text-success" : "text-danger"}>
+              <span className={showAnswers ? (isCorrect ? "text-success" : "text-danger") : ""}>
                 {studentAnswer === null || studentAnswer === undefined || studentAnswer === ""
                   ? "No answer provided"
                   : studentAnswer === true ? "True" : studentAnswer === false ? "False" : String(studentAnswer)}
               </span>
             </div>
 
-            {question.type === "Multiple Choice" && (
-              <div>
-                <strong>Correct Answer: </strong>
-                <span className="text-success">
-                  {question.answers?.join(", ")}
-                </span>
-              </div>
-            )}
+            {showAnswers && (
+              <>
+                {question.type === "Multiple Choice" && (
+                  <div>
+                    <strong>Correct Answer: </strong>
+                    <span className="text-success">
+                      {question.answers?.join(", ")}
+                    </span>
+                  </div>
+                )}
 
-            {question.type === "True/False" && (
-              <div>
-                <strong>Correct Answer: </strong>
-                <span className="text-success">
-                  {question.answers?.[0] === true || question.answers?.[0] === "True" ? "True" : "False"}
-                </span>
-              </div>
-            )}
+                {question.type === "True/False" && (
+                  <div>
+                    <strong>Correct Answer: </strong>
+                    <span className="text-success">
+                      {question.answers?.[0] === true || question.answers?.[0] === "True" ? "True" : "False"}
+                    </span>
+                  </div>
+                )}
 
-            {question.type === "Fill in the Blank" && (
-              <div>
-                <strong>Correct Answers: </strong>
-                <span className="text-success">
-                  {question.answers?.join(", ")}
-                </span>
-              </div>
+                {question.type === "Fill in the Blank" && (
+                  <div>
+                    <strong>Correct Answers: </strong>
+                    <span className="text-success">
+                      {question.answers?.join(", ")}
+                    </span>
+                  </div>
+                )}
+              </>
             )}
 
             <div className="mt-2">
               <small className="text-muted">
-                Points: {isCorrect ? question.points : 0} / {question.points}
+                Points: {showAnswers ? (isCorrect ? question.points : 0) : "?"} / {question.points}
               </small>
             </div>
           </div>

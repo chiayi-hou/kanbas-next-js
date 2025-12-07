@@ -80,7 +80,7 @@ export default function QuizDetails() {
 
   return (
     <div id="wd-quiz-details" className="ms-5 me-5">
-      {/* Header with Preview and Edit buttons (Faculty only) */}
+      {/* Header with Preview, Edit, and Publish buttons (Faculty only) */}
       {isFaculty && (
         <div className="d-flex justify-content-center mb-3">
           <Button
@@ -92,10 +92,20 @@ export default function QuizDetails() {
           </Button>
           <Button
             variant="outline-secondary"
+            className="me-2"
             onClick={() => router.push(`/Courses/${cid}/Quizzes/${qid}/Edit`)}
           >
             <FaPencil className="me-1" />
             Edit
+          </Button>
+          <Button
+            variant={quiz.published ? "success" : "warning"}
+            onClick={async () => {
+              const updated = await client.updateQuiz({ ...quiz, published: !quiz.published });
+              setQuiz(updated);
+            }}
+          >
+            {quiz.published ? "Unpublish" : "Publish"}
           </Button>
         </div>
       )}
@@ -204,7 +214,7 @@ export default function QuizDetails() {
             </tr>
             <tr>
               <td className="fw-bold">Time Limit</td>
-              <td>{quiz.timeLimit || 20} Minutes</td>
+              <td>{quiz.timeLimit > 0 ? `${quiz.timeLimit} Minutes` : "No Time Limit"}</td>
             </tr>
             <tr>
               <td className="fw-bold">Multiple Attempts</td>

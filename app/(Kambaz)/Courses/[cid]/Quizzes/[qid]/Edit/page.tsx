@@ -576,7 +576,7 @@ export default function QuizEditor() {
               </Col>
               <Col md={8}>
                 <FormCheck
-                  type="checkbox"
+                  type="switch"
                   id="wd-shuffle-answers"
                   checked={form.shuffleAnswers}
                   onChange={(e) => setForm({ ...form, shuffleAnswers: e.target.checked })}
@@ -588,16 +588,31 @@ export default function QuizEditor() {
             {/* Time Limit */}
             <Row className="mb-3">
               <Col md={4} className="d-flex justify-content-end align-items-center">
-                <FormLabel htmlFor="wd-time-limit">Time Limit</FormLabel>
+                <FormLabel>Time Limit</FormLabel>
               </Col>
               <Col md={8}>
-                <FormControl
-                  id="wd-time-limit"
-                  type="number"
-                  value={form.timeLimit}
-                  onChange={(e) => setForm({ ...form, timeLimit: parseInt(e.target.value) || 20 })}
-                />
-                <small className="text-muted">Minutes</small>
+                <div className="d-flex align-items-center">
+                  <FormCheck
+                    type="switch"
+                    id="wd-has-time-limit"
+                    checked={form.timeLimit > 0}
+                    onChange={(e) => setForm({ ...form, timeLimit: e.target.checked ? 20 : 0 })}
+                    label="Time Limit"
+                    className="me-3"
+                  />
+                  {form.timeLimit > 0 && (
+                    <>
+                      <FormControl
+                        id="wd-time-limit"
+                        type="number"
+                        style={{ width: "100px" }}
+                        value={form.timeLimit}
+                        onChange={(e) => setForm({ ...form, timeLimit: parseInt(e.target.value) || 20 })}
+                      />
+                      <span className="ms-2 text-muted">Minutes</span>
+                    </>
+                  )}
+                </div>
               </Col>
             </Row>
 
@@ -675,7 +690,7 @@ export default function QuizEditor() {
               </Col>
               <Col md={8}>
                 <FormCheck
-                  type="checkbox"
+                  type="switch"
                   id="wd-one-question-at-a-time"
                   checked={form.oneQuestionAtATime}
                   onChange={(e) => setForm({ ...form, oneQuestionAtATime: e.target.checked })}

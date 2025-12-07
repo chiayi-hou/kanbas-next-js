@@ -23,17 +23,24 @@ export default function Quizzes() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const dispatch = useDispatch();
   const [expanded, setExpanded] = useState(true);
+  const [sortBy, setSortBy] = useState<"name" | "dueDate" | "availableDate">("availableDate");
 
-  // sort quizzes
-  const sortedQuizzes = useMemo(
-  () =>
-    [...quizzes].sort(
-      (a, b) =>
-        new Date(a.availableFrom).getTime() -
-        new Date(b.availableFrom).getTime()
-    ),
-  [quizzes]
-);
+  // sort quizzes based on sortBy state
+  const sortedQuizzes = useMemo(() => {
+    return [...quizzes].sort((a, b) => {
+      if (sortBy === "name") {
+        return (a.title || "").localeCompare(b.title || "");
+      } else if (sortBy === "dueDate") {
+        const dateA = a.due ? new Date(a.due).getTime() : Infinity;
+        const dateB = b.due ? new Date(b.due).getTime() : Infinity;
+        return dateA - dateB;
+      } else {
+        const dateA = a.availableFrom ? new Date(a.availableFrom).getTime() : Infinity;
+        const dateB = b.availableFrom ? new Date(b.availableFrom).getTime() : Infinity;
+        return dateA - dateB;
+      }
+    });
+  }, [quizzes, sortBy]);
 
   // load quizzes and sent to reducer
   const fetchQuizzes = async () => {
@@ -50,7 +57,7 @@ export default function Quizzes() {
 
   return (
     <div id="wd-quizzes">
-      <QuizControl/><br/><br/>
+      <QuizControl sortBy={sortBy} setSortBy={setSortBy} /><br/><br/>
       {quizzes.length === 0 ? (
         <div className="text-center p-5">
           <p>No quizzes available. Click the &quot;Quiz&quot; button to add a new quiz.</p>
